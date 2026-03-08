@@ -3,195 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UwU Day</title>
+    <title>Dzień Kobiet 2026 - Moc Życzeń</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* --- CSS STYLES --- */
         :root {
-            --primary-color: #ff4d6d;
-            --secondary-color: #ff85a1;
-            --bg-color: #fff0f3;
+            --primary-pink: #ff758c;
+            --secondary-pink: #ff7eb3;
+            --bg-soft: #fff5f7;
+            --text-dark: #4a4a4a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: var(--bg-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
-            text-align: center;
+            color: var(--text-dark);
         }
 
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
-            max-width: 400px;
+        /* Dekoracyjne elementy tła */
+        .flower-bg {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            user-select: none;
+            z-index: 1;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(25deg); }
+        }
+
+        /* Główna karta */
+        .card {
+            background: var(--white);
+            width: 90%;
+            max-width: 450px;
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
             z-index: 10;
+            border: 8px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .icon-wrapper {
+            background: var(--bg-soft);
+            width: 80px;
+            height: 80px;
+            line-height: 85px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .heart-icon {
+            color: var(--primary-pink);
+            font-size: 2.5rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-pink);
         }
 
-        .gif-container img {
-            width: 150px;
-            margin-bottom: 1rem;
-        }
-        .gif-container-success img {
-            width: 200px;
-            margin-bottom: 1rem;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            position: relative;
+        .date-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #b1b1b1;
+            margin-bottom: 2rem;
+            display: block;
         }
 
-        button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            color: #555;
         }
 
-        #yesBtn {
-            background-color: var(--primary-color);
+        /* Przyciski i akcje */
+        .btn {
+            background: linear-gradient(to right, var(--primary-pink), var(--secondary-pink));
             color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
 
-        #noBtn {
-        background-color: #ced4da;
-        color: #495057;
-        
-        transition: all 0.2s ease; 
-    }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(255, 117, 140, 0.4);
+            filter: brightness(1.1);
+        }
 
-        .success-message {
+        .surprise-text {
             display: none;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary-pink);
+            animation: fadeIn 1s ease-out;
         }
 
-        .success-message h2 {
-            color: var(--primary-color);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
         }
     </style>
 </head>
 <body>
-    <div id="player" style="position: absolute; visibility: hidden; width: 0; height: 0;"></div>
-    <div class="container" id="mainContainer">
-        <div id="quizSection">
-            <div class="gif-container">
-                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWN4OTUwbHZ4dWU2NWYzaHI5YWdxMjYzcHJodmVrMnVwcGszbzVsbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WK7omsLop0431tZjXb/giphy.gif" alt="Cute heart">
-            </div>
-            <h1>Zostaniesz moją Walentynką?</h1>
-            
-            <div class="buttons">
-                <button id="yesBtn">Tak!</button>
-                <button id="noBtn">Nie</button>
-            </div>
-        </div>
 
-        <div id="successSection" class="success-message">
-            <div class="gif-container-success">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnRrZGMxZGNqd2R6bzI4MWx6anBxODd0OXAwZWxxeXZwdHY3cjVnMyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7zfweQR6bUvu4JF4DW/giphy.gif" alt="Celebration">
-            </div>
-            <h2>Wiedziałem! ❤️</h2>
-            <p>Rezerwuj czas na wieczór!</p>
+    <div class="flower-bg" style="top: 10%; left: 5%;">🌸</div>
+    <div class="flower-bg" style="top: 20%; right: 10%; animation-delay: 1s;">🌷</div>
+    <div class="flower-bg" style="bottom: 15%; left: 15%; animation-delay: 2s;">🌺</div>
+    <div class="flower-bg" style="bottom: 10%; right: 5%; animation-delay: 3s;">🌼</div>
+
+    <div class="card">
+        <div class="icon-wrapper">
+            <i class="fas fa-heart heart-icon"></i>
+        </div>
+        
+        <span class="date-label">8 Marca</span>
+        <h1>Dla Wyjątkowej Kobiety</h1>
+        
+        <p class="message" id="wish-text">
+            Przyjmij najserdeczniejsze życzenia: nieskończonych pokładów energii, 
+            uśmiechu każdego dnia oraz odwagi, by zawsze podążać za głosem serca.
+        </p>
+
+        <button class="btn" id="action-btn" onclick="celebrate()">Otwórz Życzenia</button>
+        
+        <div id="surprise" class="surprise-text">
+            Jesteś niesamowita! ✨🌷
         </div>
     </div>
 
     <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        /* --- JAVASCRIPT LOGIC --- */
+        function celebrate() {
+            const btn = document.getElementById('action-btn');
+            const surprise = document.getElementById('surprise');
+            const wishText = document.getElementById('wish-text');
 
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'cIul8ywTGuU', // <--- TUTAJ WPISZ ID Z LINKU YT
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'start': 30,
-                    'playlist': 'cIul8ywTGuU' // Wymagane do zapętlenia
-                    
-                }
-            });
+            // Zmiana tekstu i pokazanie niespodzianki
+            btn.style.display = 'none';
+            surprise.style.display = 'block';
+            wishText.innerHTML = "Niech ten dzień będzie tak wspaniały, jak Ty sama. Pamiętaj, że świat jest piękniejszy dzięki Tobie!";
+
+            // Efekt spadających serduszek
+            createParticles();
         }
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const quizSection = document.getElementById('quizSection');
-        const successSection = document.getElementById('successSection');
 
-        // Funkcja uciekającego przycisku "Nie"
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-        });
+        function createParticles() {
+            const count = 30;
+            const colors = ['#ff758c', '#ff7eb3', '#ffafbd', '#ffffff'];
 
-        // Obsługa kliknięcia "Tak"
-        yesBtn.addEventListener('click', () => {
-        quizSection.style.display = 'none';
-        successSection.style.display = 'block';
-        
-        // Uruchomienie muzyki z YT
-        if (player && player.playVideo) {
-            player.playVideo();
-            player.setVolume(80); // Opcjonalnie: ustawienie głośności na 50%
-        }
-        
-        createHearts();
-    });
-
-        function createHearts() {
-            for(let i = 0; i < 50; i++) {
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.style.position = 'fixed';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = '-20px';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-                document.body.appendChild(heart);
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'heart-particle';
+                particle.innerHTML = '❤️';
                 
-                setTimeout(() => heart.remove(), 5000);
+                // Losowanie pozycji startowej i parametrów
+                const startX = Math.random() * window.innerWidth;
+                const size = Math.random() * 20 + 10;
+                const duration = Math.random() * 3 + 2;
+
+                particle.style.left = startX + 'px';
+                particle.style.top = '-20px';
+                particle.style.fontSize = size + 'px';
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-in`;
+                
+                document.body.appendChild(particle);
+
+                // Animacja opadania
+                setTimeout(() => {
+                    particle.style.transform = `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 360}deg)`;
+                    particle.style.opacity = '0';
+                }, 50);
+
+                // Usunięcie elementu po animacji
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
             }
         }
-
-        // Prosta animacja spadania serduszek
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fall {
-                to {
-                    transform: translateY(105vh) rotate(360deg);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        
     </script>
 </body>
-
 </html>
-
-
-
