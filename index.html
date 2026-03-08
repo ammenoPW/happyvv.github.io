@@ -59,7 +59,6 @@
 
         .btn:hover { transform: scale(1.05); }
 
-        /* Ukrycie odtwarzacza YouTube */
         #youtube-player {
             position: absolute;
             top: -9999px;
@@ -88,7 +87,7 @@
     <div class="card">
         <i class="fas fa-heart heart-icon"></i>
         <h1 style="color: var(--primary-pink); margin: 1rem 0;">Dla Ciebie</h1>
-        <p id="instruction" style="margin-bottom: 2rem;">Włącz niespodziankę...</p>
+        <p id="instruction" style="margin-bottom: 2rem;">Przygotowałem coś specjalnego...</p>
 
         <button class="btn" id="action-btn" onclick="startExperience()">Otwórz Życzenia 🎵</button>
         
@@ -101,9 +100,10 @@
 
     <script>
         let player;
-        const VIDEO_ID = 'dQw4w9WgXcQ'; // <-- TUTAJ WKLEJ ID FILMU (np. dQw4w9WgXcQ)
+        // Podmień poniższe ID na ID piosenki The Weeknd
+        const VIDEO_ID = 'dQw4w9WgXcQ'; 
+        const START_SECOND = 47; 
 
-        // Inicjalizacja odtwarzacza
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0',
@@ -111,18 +111,27 @@
                 videoId: VIDEO_ID,
                 playerVars: {
                     'autoplay': 0,
-                    'controls': 0
+                    'controls': 0,
+                    'start': START_SECOND // Ustawienie startu w parametrach
+                },
+                events: {
+                    'onReady': onPlayerReady
                 }
             });
         }
 
+        function onPlayerReady(event) {
+            // Wyciszenie na starcie, aby uniknąć blokad przeglądarki (opcjonalne)
+            event.target.setVolume(100);
+        }
+
         function startExperience() {
-            // 1. Start muzyki
             if (player && player.playVideo) {
+                // Dodatkowe upewnienie się, że zaczynamy od 47 sekundy
+                player.seekTo(START_SECOND, true);
                 player.playVideo();
             }
 
-            // 2. Efekty wizualne
             document.getElementById('action-btn').style.display = 'none';
             document.getElementById('instruction').style.display = 'none';
             document.getElementById('surprise').style.display = 'block';
