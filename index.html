@@ -100,7 +100,6 @@
 
     <script>
         let player;
-        // Podmień poniższe ID na ID piosenki The Weeknd
         const VIDEO_ID = 'qTI-OniHrOk'; 
         const START_SECOND = 47; 
 
@@ -121,13 +120,11 @@
         }
 
         function onPlayerReady(event) {
-            // Wyciszenie na starcie, aby uniknąć blokad przeglądarki (opcjonalne)
             event.target.setVolume(100);
         }
 
         function startExperience() {
             if (player && player.playVideo) {
-                // Dodatkowe upewnienie się, że zaczynamy od 47 sekundy
                 player.seekTo(START_SECOND, true);
                 player.playVideo();
             }
@@ -162,4 +159,5 @@
     </script>
 </body>
 </html>
+
 
